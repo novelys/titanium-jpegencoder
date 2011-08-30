@@ -104,7 +104,7 @@ Check `example/app.js` for more examples.
 
 ## Author
 
-Android Jpeg Encoder was made by [Novelys](www.novelys.com) (www.novelys.com). A small and agile software development team.
+Android Jpeg Encoder was made by [Novelys](http://www.novelys.com) (www.novelys.com). A small and agile software development team.
 
 Feel free to contact us through our [website](http://www.novelys.com/contact) (http://www.novelys.com/contact)
 
