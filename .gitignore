@@ -1,0 +1,9 @@
+tmp
+bin
+build/*
+!build/.gitignore
+*.zip
+.apt_generated
+.DS_Store
+dist/*
+!dist/.gitignore
