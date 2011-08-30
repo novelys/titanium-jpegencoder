@@ -11,7 +11,7 @@ This module is still in beta, feel free to report any issues. Or fork it, patch 
 
 ## Install the module
 
-You can either download a precompile build from Github (downloads button, if so skip steps one and two) or get the source code and build it yourself.
+You can either download a precompiled build from Github (downloads button, if so skip steps one and two) or get the source code and build it yourself.
 
 1. At root, run `ant build.xml`
 2. Get the generated zip file from the `dist/` directory
@@ -60,7 +60,7 @@ Scaling an image is just as easy. Set the `newHeight` and `newWidth` properties 
 
 	second.scaleAndEncode();
 
-Alternatively, if you want to keep proportions during scaling you can set only one property (either `newHeight` or `newWidth`) and set the `keepProportion` property to `true`.
+Alternatively, if you want to keep proportions during scaling you can set only one property (either `newHeight` or `newWidth`) and set the `keepProportions` property to `true`.
 
 	var third = JpegEncoder.createEncoder({
 		imageBlob: imageBlob,
