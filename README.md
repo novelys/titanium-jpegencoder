@@ -1,3 +1,4 @@
+
 # Android Jpeg Encoder for Titanium
 
 ## Description
@@ -12,14 +13,14 @@ This module is still in beta, feel free to report any issues. Or fork it, patch 
 
 You can either download a precompile build from Github (downloads button, if so skip steps one and two) or get the source code and build it yourself.
 
-1. At root, run `"ant build.xml"`
+1. At root, run `ant build.xml`
 2. Get the generated zip file from the `dist/` directory
 3. Copy the downloaded (or generated) archive to the root of the Titanium app, or to the root of the system Titanium installation.
 4. Edit `tiapp.xml` to add the module
 
-	<modules>
-		<module version="{VERSION_NUMBER}" platform="android">com.novelys.jpegencoder</module>
-	</modules>
+		<modules>
+			<module version="{VERSION_NUMBER}" platform="android">com.novelys.jpegencoder</module>
+		</modules>
 
 ## Accessing the Jpeg Encoder Module
 
