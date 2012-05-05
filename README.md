@@ -9,9 +9,29 @@ Jpeg Encoder only works on Android platforms. If you need another module which o
 
 This module is still in beta, feel free to report any issues. Or fork it, patch the issue and send a pull request.
 
+The library is now compatible with Titanium 1.8+. If you need to support older version, check the `under-1-8` branch (v0.1.1).
+
 ## Install the module
 
 You can either download a precompiled build from Github (downloads button, if so skip steps one and two) or get the source code and build it yourself.
+
+Note: If you plan on building the module, make sure the following classpath entries are set according to your environment:
+
+* android.jar
+* maps.jar
+* titanium.jar
+* js.jar
+* kroll-apt.jar
+* kroll-common.jar
+
+Next, rename `build.properties.example` into `build.properties` and, again, set the following paths according to your environment:
+
+* `titanium.platform`
+* `android.platform`
+* `google.apis`
+* `android.ndk`
+
+You can now build the module!
 
 1. At root, run `ant build.xml`
 2. Get the generated zip file from the `dist/` directory

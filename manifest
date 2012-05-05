@@ -2,11 +2,11 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.1
+version: 0.2
 description: Android native Jpeg Encoder for Titanium
 author: Novelys
 license: Apache license version 2.0
-copyright: Copyright (c) 2011 by Novelys
+copyright: Copyright (c) 2012 by Novelys and others
 
 
 # these should not be edited
@@ -14,4 +14,5 @@ name: jpegencoder
 moduleid: com.novelys.jpegencoder
 guid: 4266182a-7e74-4872-9874-cf2aebf52ef0
 platform: android
-minsdk: 1.7.2
+minsdk: 1.8.2
+apiversion: 2
