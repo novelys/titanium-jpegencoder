@@ -9,12 +9,12 @@
 package com.novelys.jpegencoder;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiBlob;
-import org.appcelerator.titanium.TiContext;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -48,18 +48,16 @@ public class EncoderProxy extends KrollProxy {
 
 	/**
 	 * Construct and initialize the proxy.
-	 * 
-	 * @param tiContext Titanium context
 	 */
-	public EncoderProxy(TiContext tiContext) {
-		super(tiContext);
+	public EncoderProxy() {
+		super();
 	}
 
 	/**
 	 * Handle the dictionary of parameters given at creation.
 	 */
 	public void handleCreationDict(KrollDict dict) {
-
+		
 		if (dict.containsKeyAndNotNull("imageBlob")) {
 			imageBlob = (TiBlob) dict.get("imageBlob");
 		} else {
@@ -142,7 +140,7 @@ public class EncoderProxy extends KrollProxy {
 	
 			resizedBitmap.compress(CompressFormat.JPEG, compressionQuality, bos);
 	
-			imageBlob = TiBlob.blobFromData(imageBlob.getTiContext(), bos.toByteArray(),
+			imageBlob = TiBlob.blobFromData(bos.toByteArray(),
 					"image/jpeg");
 		} else {
 			encode();
@@ -170,15 +168,17 @@ public class EncoderProxy extends KrollProxy {
 	 */
 	@Kroll.method
 	public void encode() {
+		
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
+		
 		byte[] byteArray = imageBlob.getBytes();
 
 		Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0,
 				byteArray.length);
+			
 		bm.compress(CompressFormat.JPEG, compressionQuality, bos);
 
-		imageBlob = TiBlob.blobFromData(imageBlob.getTiContext(), bos.toByteArray(),
+		imageBlob = TiBlob.blobFromData(bos.toByteArray(),
 				"image/jpeg");
 	}
 
@@ -246,7 +246,10 @@ public class EncoderProxy extends KrollProxy {
 		return cropRect;
 	}
 
-	public void setCropRect(KrollDict dict) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void setCropRect(HashMap dictionary) {
+		
+		KrollDict dict = new KrollDict(dictionary);
 		
 		if (dict.containsKeyAndNotNull("cropRect")) {
 			KrollDict krollDict = dict.getKrollDict("cropRect");
