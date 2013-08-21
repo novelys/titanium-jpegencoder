@@ -92,6 +92,36 @@ public class EncoderProxy extends KrollProxy {
 		setCropRect(dict);
 	}
 
+	
+	/*
+	 * This method will calculate the inSampleSize property.  
+	 */
+	private int calculateInSampleSize(BitmapFactory.Options options,
+			int reqWidth, int reqHeight) {
+		// Raw height and width of image
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		int inSampleSize = 1;
+
+		if (height > reqHeight || width > reqWidth) {
+
+			// Calculate ratios of height and width to requested height and
+			// width
+			final int heightRatio = Math.round((float) height
+					/ (float) reqHeight);
+			final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+			// Choose the smallest ratio as inSampleSize value, this will
+			// guarantee
+			// a final image with both dimensions larger than or equal to the
+			// requested height and width.
+			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+		}
+
+		return inSampleSize;
+	}
+	
+	
 	/**
 	 * Scale, encode or do both depending on the parameters given by the
 	 * dictionary and then encode the image in Jpeg.
@@ -103,18 +133,20 @@ public class EncoderProxy extends KrollProxy {
 		if ((keepProportions && (newWidth > 0 || newHeight > 0)) ||
 			(newWidth > 0 && newHeight > 0) || cropRect != null) {
 
-			Bitmap bm = BitmapFactory.decodeByteArray(imageBlob.getBytes(), 0,
-					imageBlob.getBytes().length);
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
 			
-			if (keepProportions) {
-				if (newWidth > 0) {
-					double coeff = ((double)bm.getHeight())/bm.getWidth();
-					newHeight = (int) (newWidth * coeff);
-				} else if (newHeight > 0) {
-					double coeff = ((double)bm.getWidth())/bm.getHeight();
-					newWidth = (int) (newHeight * coeff);
-				}
-			}
+			BitmapFactory.decodeByteArray(imageBlob.getBytes(), 0,
+					imageBlob.getBytes().length, options);
+
+		    // Calculate inSampleSize
+		    options.inSampleSize = calculateInSampleSize(options, newWidth, newHeight);
+		    System.out.println("in sample Size "+options.inSampleSize);
+		    // Decode bitmap with inSampleSize set
+		    options.inJustDecodeBounds = false;		
+			
+			Bitmap bm = BitmapFactory.decodeByteArray(imageBlob.getBytes(), 0,
+					imageBlob.getBytes().length, options);
 	
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			
